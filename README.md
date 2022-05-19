@@ -1,3 +1,3 @@
-# Giv-vue-BLog 说明文档
+# Gin-vue-BLog 说明文档
 
 ## 待完善 ...
