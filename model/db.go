@@ -1,11 +1,14 @@
 package model
 
 import (
+	"encoding/base64"
 	"fmt"
 	"github.com/frui85/gin-vue-blog/utils"
+	"golang.org/x/crypto/scrypt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+	"log"
 	"time"
 )
 
@@ -49,4 +52,17 @@ func InitDb() {
 	// SetConnMaxLifetime 设置了连接可复用的最大时间。
 	dbcp.SetConnMaxLifetime(10 * time.Second)
 
+}
+
+// 密码加密
+func ScryptPw(password string) string {
+	const KeyLen = 10
+	salt := make([]byte, 8)
+	salt = []byte{6, 66, 68, 8, 88, 80, 86, 60}
+	HashPw, err := scrypt.Key([]byte(password), salt, 16384, 8, 1, KeyLen)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fpw := base64.StdEncoding.EncodeToString(HashPw)
+	return fpw
 }

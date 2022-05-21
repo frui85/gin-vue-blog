@@ -72,5 +72,13 @@ func EditUser(c *gin.Context) {
 
 // 删除用户
 func DeleteUser(c *gin.Context) {
-
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		fmt.Println(err)
+	}
+	code := model.DeleteUser(id)
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"message": errmsg.GetErrMsg(code),
+	})
 }
