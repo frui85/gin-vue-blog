@@ -15,6 +15,8 @@ const (
 	ERROR_TOKEN_TYPE_WRONG    = 1204
 
 	// code = 2000... 表示文章模块错误
+	ERROR_CATENAME_USED  = 2001
+	ERROR_CATE_NOT_EXIST = 2002
 
 	// code = 3000... 表示分类模块错误
 
@@ -22,8 +24,9 @@ const (
 )
 
 var CodeMsg = map[int]string{
-	SUCCESS:                   "ok",
-	ERROR:                     "fail",
+	SUCCESS: "ok",
+	ERROR:   "fail",
+
 	ERROR_USERNAME_USED:       "用户名已存在",
 	ERROR_USER_NOT_EXIST:      "用户不存在",
 	ERROR_PASSWORD_WRONG:      "密码不正确",
@@ -32,6 +35,9 @@ var CodeMsg = map[int]string{
 	ERROR_TOKEN_EXPIRED:       "TOKEN已过期",
 	ERROR_TOKEN_WRONG:         "TOKEN不正确",
 	ERROR_TOKEN_TYPE_WRONG:    "TOKEN格式错误",
+
+	ERROR_CATENAME_USED:  "分类已存在",
+	ERROR_CATE_NOT_EXIST: "分类不存在",
 }
 
 func GetErrMsg(code int) string {

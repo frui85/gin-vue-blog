@@ -10,9 +10,7 @@ import (
 )
 
 // 查询用户是否存在
-func UserExist(c *gin.Context) {
-
-}
+func UserExist(c *gin.Context) {}
 
 // 添加用户
 func AddUser(c *gin.Context) {
