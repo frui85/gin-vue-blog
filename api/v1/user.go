@@ -16,7 +16,6 @@ func UserExist(c *gin.Context) {
 
 // 添加用户
 func AddUser(c *gin.Context) {
-	// todo 添加用户
 	data := new(model.User)
 	_ = c.ShouldBindJSON(&data)
 	code := model.CheckUser(data.Username)
@@ -67,7 +66,21 @@ func GetUsers(c *gin.Context) {
 
 // 编辑用户
 func EditUser(c *gin.Context) {
-
+	var data model.User
+	id, _ := strconv.Atoi(c.Param("id"))
+	c.ShouldBindJSON(&data)
+	//判断是否存在用户名，编辑后不能和已有用户名重名
+	code := model.CheckUser(data.Username)
+	if code == errmsg.ERROR_USERNAME_USED {
+		c.Abort()
+	}
+	if code == errmsg.SUCCESS {
+		model.EditUser(id, &data)
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"message": errmsg.GetErrMsg(code),
+	})
 }
 
 // 删除用户

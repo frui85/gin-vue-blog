@@ -76,8 +76,11 @@ func DeleteUser(id int) int {
 func EditUser(id int, data *User) int {
 	var user User //gorm操作避免使用&User{},而使用&user 显的更简洁
 	var maps = make(map[string]interface{})
-	maps["usernmae"] = data.Username
+	maps["username"] = data.Username
 	maps["role"] = data.Role
-	db.Model(&user).Where("id=?", id).Updates(maps)
-
+	err = db.Model(&user).Where("id=?", id).Updates(maps).Error
+	if err != nil {
+		return errmsg.ERROR
+	}
+	return errmsg.SUCCESS
 }
