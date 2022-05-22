@@ -16,7 +16,7 @@ func CheckCate(name string) int {
 	cate := new(Category)
 	db.Select("id").Where("name = ?", name).First(&cate)
 	if cate.ID > 0 {
-		return errmsg.ERROR_USERNAME_USED //1001
+		return errmsg.ERROR_CATENAME_USED //1001
 	}
 	return errmsg.SUCCESS //200
 }

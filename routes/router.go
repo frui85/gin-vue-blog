@@ -26,6 +26,10 @@ func InitRouter() {
 		rv1.DELETE("category/:id", v1.DeleteCate)
 
 		//Article-文章模块的路由接口
+		rv1.POST("article/add", v1.AddArt)
+		//rv1.GET("article", v1.GetArt)
+		rv1.PUT("article/:id", v1.EditArt)
+		rv1.DELETE("article/:id", v1.DeleteArt)
 
 		//test hello
 		rv1.GET("hello", func(c *gin.Context) {
