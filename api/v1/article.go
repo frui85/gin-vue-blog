@@ -12,6 +12,30 @@ import (
 // todo 查询单个文章
 
 // todo 查询文章列表
+func GetArtList(c *gin.Context) {
+	pageSize, err := strconv.Atoi(c.Query("pagesize"))
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	pageNum, err := strconv.Atoi(c.Query("pagenum"))
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	// 如果想取消limit或者Offset，就给传值-1，见gorm查询文档说明，https://gorm.io/zh_CN/docs/query.html#Limit-amp-Offset
+	if pageSize <= 0 {
+		pageSize = -1
+	}
+
+	data, code := model.GetArtList(pageSize, pageNum)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"data":    data,
+		"message": errmsg.GetErrMsg(code),
+	})
+}
 
 // 添加文章
 func AddArt(c *gin.Context) {
