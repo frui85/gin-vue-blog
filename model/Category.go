@@ -47,8 +47,6 @@ func GetCate(pageSize int, pageNum int) []Category {
 	return cate
 }
 
-// todo 查询分类下的所有文章
-
 // 删除分类
 func DeleteCate(id int) int {
 	var cate Category

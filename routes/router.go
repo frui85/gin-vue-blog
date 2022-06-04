@@ -30,6 +30,8 @@ func InitRouter() {
 		rv1.GET("articlelist", v1.GetArtList)
 		rv1.PUT("article/:id", v1.EditArt)
 		rv1.DELETE("article/:id", v1.DeleteArt)
+		rv1.GET("article/:id", v1.GetArtInfo)
+		rv1.GET("cateartlist/:id", v1.GetCateArt)
 
 		//test hello
 		rv1.GET("hello", func(c *gin.Context) {
